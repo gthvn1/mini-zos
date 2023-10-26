@@ -4,6 +4,10 @@ Inspired by mini-os that is a small OS kernel running on Xen hypervisor.
 
 - [Some notes about the original mini-os](https://wiki.xenproject.org/wiki/Mini-OS-DevNotes)
 
+# Cool links
+
+- [Zig Live Coding - "Hello world" x86 kernel](https://vimeo.com/483928663) - Andrew Kelley
+
 # Build
 
 `zig build-exe naked.zig -target x86_64-freestanding -static -Tlinker.ld`
