@@ -1,20 +1,21 @@
 /// The initial memory of a new domain created by Xen contains the start info
 /// page. This page will be mapped by mini-zos in its address space.
-const Console = union {
-    // TODO: complete union
-    //     union {
-    //         struct {
-    //             xen_pfn_t mfn;      /* MACHINE page number of console page.   */
-    //             uint32_t  evtchn;   /* Event channel for console page.        */
-    //         } domU;
-    //         struct {
-    //             uint32_t info_off;  /* Offset of console_info struct.         */
-    //             uint32_t info_size; /* Size of console_info struct from start.*/
-    //         } dom0;
-    //     } console;
+const ConsoleDom0 = struct {
+    info_off: u32, // Offset of console_info struct.
+    info_size: u32, // Size of console_info struct from start
 };
 
-const startInfo = struct {
+const ConsoleDomU = struct {
+    mfn: u64, // Machine Page Number of console page
+    evtchn: u32, // Event channel for console page
+};
+
+const Console = union {
+    domU: ConsoleDomU,
+    dom0: ConsoleDom0,
+};
+
+const StartInfo = struct {
     magic: [32]u8, // xen-<version>-<platform>
     nr_pages: u64, // Total pages allocated to this domain
     shared_info: u64, // MACHINE address of shared info page structure
