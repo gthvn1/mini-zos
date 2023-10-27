@@ -2,7 +2,8 @@
 
 Inspired by mini-os that is a small OS kernel running on Xen hypervisor.
 
-- [Some notes about the original mini-os](https://wiki.xenproject.org/wiki/Mini-OS-DevNotes)
+- [Mini-OS source code](http://xenbits.xen.org/gitweb/?p=mini-os.git;a=summary)
+- [Some notes about the original Mini-OS](https://wiki.xenproject.org/wiki/Mini-OS-DevNotes)
 
 # Cool links
 
