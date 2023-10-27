@@ -26,3 +26,7 @@ Disassembly of section .text:
    10000:       eb 00                   jmp    10002 <_start+0x2>
    10002:       eb fe                   jmp    10002 <_start+0x2>
 ```
+
+# The secret project
+
+The secret goal is to run a unikernel written in zig on top of Xen that provides runtime for Wasm binaries...
