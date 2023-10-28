@@ -12,9 +12,12 @@ Inspired by mini-os that is a small OS kernel running on Xen hypervisor.
 
 # Build
 
-`zig build-exe naked.zig -target x86_64-freestanding -static -Tlinker.ld`
+- Just run `zig build`
+- the build will produce a binary **zig-out/bin/mini-zos**
 
 # Tadam...
+
+- **Note**: output is now different. Will be updated soon...
 
 ```asm
 via ❄️  impure (shell) ❯ objdump -d naked
