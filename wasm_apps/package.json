@@ -1,0 +1,15 @@
+{
+  "name": "fibonacci",
+  "description": "let's run fibonacci",
+  "author": "me",
+  "type": "module",
+  "private": true,
+  "license": "GPL",
+  "devDependencies": {
+    "@types/node": "^16.11.22",
+    "core-js": "^3.21.0"
+  },
+  "scripts": {
+    "test": "node index.js"
+  }
+}

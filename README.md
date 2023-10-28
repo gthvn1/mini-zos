@@ -32,3 +32,7 @@ Disassembly of section .text:
 
 The ultimate goal is to run a unikernel written in zig that runs on top of Xen and provides runtime for Wasm binaries...
 Cool no :)
+
+# Web Assembly
+
+Look into the repo `wasm_apps` to have a little sneak peek of *Wasm*.
