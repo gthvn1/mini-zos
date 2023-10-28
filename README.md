@@ -12,24 +12,22 @@ Inspired by mini-os that is a small OS kernel running on Xen hypervisor.
 
 # Build
 
-- Just run `zig build`
+- Just run `zig build -Doptimize=ReleaseSmall`
 - the build will produce a binary **zig-out/bin/mini-zos**
 
 # Tadam...
 
-- **Note**: output is now different. Will be updated soon...
-
 ```asm
-via ❄️  impure (shell) ❯ objdump -d naked
+via ❄️  impure (nix-shell) ❯ objdump -d zig-out/bin/mini-zos
 
-naked:     file format elf64-x86-64
+zig-out/bin/mini-zos:     file format elf64-x86-64
 
 
 Disassembly of section .text:
 
-0000000000010000 <_start>:
-   10000:       eb 00                   jmp    10002 <_start+0x2>
-   10002:       eb fe                   jmp    10002 <_start+0x2>
+0000000000010000 <.text>:
+   10000:       bc 10 20 01 00          mov    $0x12010,%esp
+   10005:       eb fe                   jmp    0x10005
 ```
 
 # The ultimate goal
