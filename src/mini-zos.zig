@@ -2,7 +2,6 @@ const startInfo = @import("start_info.zig");
 
 // the stack should be aligned to 16-bytes boundary.
 export var stack: [8 * 1024]u8 align(16) linksection(".bss") = undefined;
-var stack_top: usize = undefined;
 
 // Hypercall is done by mapping an hypercall page in mini-zos address
 // space. The hypercall_page will be filled by Xen when it will load
@@ -13,7 +12,7 @@ export var hypercall_page: [4 * 1024]u8 linksection(".hypercall_page") = undefin
 // See modifiers for inline asm
 // https://gcc.gnu.org/onlinedocs/gcc/Extended-Asm.html#x86Operandmodifiers
 export fn _start() callconv(.Naked) noreturn {
-    stack_top = @intFromPtr(&stack) + stack.len;
+    const stack_top: usize = @intFromPtr(&stack) + stack.len;
     asm volatile (
         \\mov %[stack_top], %%rsp
         \\call %[kernelStart:P]
