@@ -12,6 +12,7 @@ Inspired by mini-os that is a small OS kernel running on Xen hypervisor.
 
 # Build
 
+- We are targeting the native x86_64 architecture.
 - Just run `zig build -Doptimize=ReleaseSmall`
 - the build will produce a binary **zig-out/bin/mini-zos**
 

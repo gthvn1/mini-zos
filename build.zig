@@ -2,7 +2,6 @@ const std = @import("std");
 
 pub fn build(b: *std.Build) void {
     var target = b.standardTargetOptions(.{});
-    target.cpu_arch = .x86_64;
     target.os_tag = .freestanding;
 
     const optimize = b.standardOptimizeOption(.{});
