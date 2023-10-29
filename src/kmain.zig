@@ -1,4 +1,5 @@
 const startInfo = @import("startinfo.zig");
+const builtin = @import("std").builtin;
 
 // the stack should be aligned to 16-bytes boundary.
 export var stack: [8 * 1024]u8 align(16) linksection(".bss") = undefined;
@@ -8,6 +9,13 @@ export var stack: [8 * 1024]u8 align(16) linksection(".bss") = undefined;
 // us. We just need to keep space at 0x3000
 // Look in xen source: xen/arch/x86/guest/xen/hypercall_page.S
 export var hypercall_page: [4 * 1024]u8 linksection(".hypercall_page") = undefined;
+
+pub fn panic(msg: []const u8, stack_trace: ?*builtin.StackTrace, ret_addr: ?usize) noreturn {
+    _ = ret_addr;
+    _ = msg;
+    _ = stack_trace;
+    while (true) {}
+}
 
 // See modifiers for inline asm
 // https://gcc.gnu.org/onlinedocs/gcc/Extended-Asm.html#x86Operandmodifiers
