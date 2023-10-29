@@ -8,11 +8,11 @@ pub fn build(b: *std.Build) void {
 
     const exe = b.addExecutable(.{
         .name = "mini-zos",
-        .root_source_file = .{ .path = "./kernel/mini-zos.zig" },
+        .root_source_file = .{ .path = "./src/mini-zos.zig" },
         .target = target,
         .optimize = optimize,
     });
-    exe.setLinkerScript(.{ .path = "./kernel/linker.ld" });
+    exe.setLinkerScript(.{ .path = "./src/linker.ld" });
 
     b.installArtifact(exe);
 

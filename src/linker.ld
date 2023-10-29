@@ -2,15 +2,19 @@ ENTRY(_start)
 
 SECTIONS {
     . = 0x10000;   /* Set the starting address to 0x10000 */
-    .text : {     /* .text section contains program code */
+    .text : ALIGN(4K) {     /* .text section contains program code */
         *(.text)  /* Merge all .text sections from input files */
     }
 
-    .data : {     /* .data section contains initialized data */
+    .rodata : ALIGN(4K) {     /* .data section contains initialized data */
+        *(.rodata)  /* Merge all .data sections from input files */
+    }
+
+    .data : ALIGN(4K) {     /* .data section contains initialized data */
         *(.data)  /* Merge all .data sections from input files */
     }
 
-    .bss : {      /* .bss section contains uninitialized data */
+    .bss : ALIGN(4K) {      /* .bss section contains uninitialized data */
         *(.bss)   /* Merge all .bss sections from input files */
     }
 
