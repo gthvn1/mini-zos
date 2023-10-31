@@ -8,6 +8,7 @@ Inspired by mini-os that is a small OS kernel running on Xen hypervisor.
 # Cool links
 
 - [Zig Bare Bones](https://wiki.osdev.org/Zig_Bare_Bones)
+- [HellOS](https://github.com/andrewrk/HellOS)
 - [Zig Live Coding - "Hello world" x86 kernel](https://vimeo.com/483928663) - Andrew Kelley
 
 # Build
