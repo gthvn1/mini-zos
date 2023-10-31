@@ -14,12 +14,10 @@ export var hypercall_page: [4 * 1024]u8 linksection(".hypercall_page") = undefin
 export fn _start() callconv(.Naked) noreturn {
     const stack_top: usize = @intFromPtr(&stack) + stack.len;
     asm volatile (
-        \\mov %[stack_top], %%rsp
-        \\call %[kernelStart:P]
+        \\call %[kmain:P]
         : // output operands
-        : [stack_top] "r" (stack_top), //input operands
-          [kernelStart] "X" (&kMain),
-        : "rsp " //Clobbers
+        : [_] "{rsp}" (stack_top), //input operands [setup the stack]
+          [kmain] "X" (&kMain),
     );
 
     while (true)
@@ -27,6 +25,6 @@ export fn _start() callconv(.Naked) noreturn {
 }
 
 fn kMain() void {
-    // add nop nop to help to spot it if disassemble...
+    // add nop nop to help to spot the code when objdumped...
     asm volatile ("nop; nop");
 }

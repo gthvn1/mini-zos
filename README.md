@@ -19,8 +19,12 @@ Inspired by mini-os that is a small OS kernel running on Xen hypervisor.
 
 # Tadam...
 
-```asm
-via ❄️  impure (nix-shell) ❯ objdump -d zig-out/bin/mini-zos
+```sh
+~/git/mini-zos master* ⇡
+❯ zig build -Doptimize=ReleaseSmall
+
+~/git/mini-zos master* ⇡
+❯ objdump -d zig-out/bin/mini-zos
 
 zig-out/bin/mini-zos:     file format elf64-x86-64
 
@@ -28,14 +32,13 @@ zig-out/bin/mini-zos:     file format elf64-x86-64
 Disassembly of section .text:
 
 0000000000010000 <.text>:
-   10000:       b8 00 30 01 00          mov    $0x13000,%eax
-   10005:       48 89 c4                mov    %rax,%rsp
-   10008:       e8 03 00 00 00          call   0x10010
-   1000d:       f4                      hlt
-   1000e:       eb fd                   jmp    0x1000d
-   10010:       90                      nop
-   10011:       90                      nop
-   10012:       c3                      ret
+   10000:       bc 00 30 01 00          mov    $0x13000,%esp
+   10005:       e8 03 00 00 00          call   0x1000d
+   1000a:       f4                      hlt
+   1000b:       eb fd                   jmp    0x1000a
+   1000d:       90                      nop
+   1000e:       90                      nop
+   1000f:       c3                      ret
 ```
 
 # The ultimate goal
