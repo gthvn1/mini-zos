@@ -1,4 +1,5 @@
 const startInfo = @import("startinfo.zig");
+const elfNote = @import("elfnotes.zig");
 
 // the stack should be aligned to 16-bytes boundary.
 export var stack: [8 * 1024]u8 align(16) linksection(".bss") = undefined;
@@ -12,6 +13,12 @@ export var hypercall_page: [4 * 1024]u8 linksection(".hypercall_page") = undefin
 // See modifiers for inline asm
 // https://gcc.gnu.org/onlinedocs/gcc/Extended-Asm.html#x86Operandmodifiers
 export fn _start() callconv(.Naked) noreturn {
+
+    //elfNote.gen("Xen", "2", ".quad TODO:hypercall_page"); // hypercall_page should be replaced by its value
+    elfNote.gen_asciz("Xen", "5", "xen-3.0");
+    elfNote.gen_asciz("Xen", "6", "Mini-ZOS");
+    elfNote.gen_asciz("Xen", "8", "generic");
+
     const stack_top: usize = @intFromPtr(&stack) + stack.len;
     asm volatile (
         \\call %[kmain:P]
