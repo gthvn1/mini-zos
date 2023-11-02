@@ -1,4 +1,4 @@
-const startInfo = @import("start_info.zig");
+const startInfo = @import("startinfo.zig");
 
 // the stack should be aligned to 16-bytes boundary.
 export var stack: [8 * 1024]u8 align(16) linksection(".bss") = undefined;
