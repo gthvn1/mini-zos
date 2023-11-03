@@ -16,6 +16,31 @@ const XenElfNote = enum {
             .loader => "8",
         };
     }
+
+    pub inline fn pushsection() []const u8 {
+        return 
+        \\    .pushsection .note.Xen
+        \\    .align 4
+        \\    .long 2f - 1f
+        \\    .long 4f - 3f
+        \\
+        ;
+    }
+
+    pub inline fn middlesection() []const u8 {
+        return 
+        \\1:.asciz #Xen
+        \\2:.align 4
+        \\
+        ;
+    }
+    pub inline fn popsection() []const u8 {
+        return 
+        \\4:.align 4
+        \\    .popsection
+        \\
+        ;
+    }
 };
 
 inline fn toHexString(comptime value: usize) []const u8 {
@@ -27,26 +52,16 @@ inline fn toHexString(comptime value: usize) []const u8 {
 pub inline fn genXenLong(comptime value: XenElfNote, comptime desc: usize) void {
     const desc_string = toHexString(desc);
 
-    asm volatile ("    .pushsection .note.Xen\n" ++
-            "    .align 4\n" ++
-            "    .long 2f - 1f\n" ++ // name size
-            "    .long 4f - 3f\n" ++ // desc size
+    asm volatile (XenElfNote.pushsection() ++
             "    .long " ++ value.toString() ++ "\n" ++ // type
-            "1:.asciz #Xen\n" ++
-            "2:.align 4\n" ++
+            XenElfNote.middlesection() ++
             "3:.long \"" ++ desc_string ++ "\"\n" ++
-            "4:.align 4\n" ++
-            "    .popsection\n");
+            XenElfNote.popsection());
 }
 pub inline fn genXenAsciz(comptime value: XenElfNote, comptime desc: []const u8) void {
-    asm volatile ("    .pushsection .note.Xen\n" ++
-            "    .align 4\n" ++
-            "    .long 2f - 1f\n" ++ // name size
-            "    .long 4f - 3f\n" ++ // desc size
+    asm volatile (XenElfNote.pushsection() ++
             "    .long " ++ value.toString() ++ "\n" ++ // type
-            "1:.asciz #Xen\n" ++
-            "2:.align 4\n" ++
+            XenElfNote.middlesection() ++
             "3:.asciz \"" ++ desc ++ "\"\n" ++
-            "4:.align 4\n" ++
-            "    .popsection\n");
+            XenElfNote.popsection());
 }

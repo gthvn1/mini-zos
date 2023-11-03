@@ -33,7 +33,7 @@ export fn _start() callconv(.Naked) noreturn {
     elfNote.genXenAsciz(.xen_version, "xen-3.0");
     elfNote.genXenAsciz(.guest_os, "Mini-ZOS");
     elfNote.genXenAsciz(.loader, "generic");
-    elfNote.genXenLong(.hypercall_page, hypercall_page);
+    //elfNote.genXenLong(.hypercall_page, hypercall_page);
 
     while (true)
         asm volatile ("hlt");
