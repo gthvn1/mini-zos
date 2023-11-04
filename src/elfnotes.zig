@@ -3,14 +3,12 @@
 
 // See mini-os include/xen/elfnote.h
 const XenElfNote = enum {
-    hypercall_page,
     xen_version,
     guest_os,
     loader,
 
     pub fn toString(note: XenElfNote) []const u8 {
         return switch (note) {
-            .hypercall_page => "2",
             .xen_version => "5",
             .guest_os => "6",
             .loader => "8",
