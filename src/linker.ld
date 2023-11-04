@@ -10,6 +10,11 @@ SECTIONS {
         *(.rodata)  /* Merge all .data sections from input files */
     }
 
+    .note : {
+        *(.note)
+        *(.note.*)
+    }
+    
     .data : ALIGN(4K) {     /* .data section contains initialized data */
         *(.data)  /* Merge all .data sections from input files */
     }
