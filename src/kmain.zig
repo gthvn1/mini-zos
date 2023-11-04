@@ -19,9 +19,24 @@ export fn _start() callconv(.Naked) noreturn {
           [kmain] "X" (&kMain),
     );
 
+    elfNote.genXen(.xen_version, "xen-3.0");
+    elfNote.genXen(.guest_os, "Mini-ZOS");
+    elfNote.genXen(.loader, "generic");
     // Need to make room for the shared info page and hypercall page.
     // Look in xen source: xen/arch/x86/guest/xen/hypercall_page.S
     asm volatile (
+        \\
+        \\    .pushsection .note.Xen
+        \\    .align 4
+        \\    .long 2f - 1f
+        \\    .long 4f - 3f
+        \\    .long 2
+        \\1:.asciz #Xen
+        \\2:.align 4
+        \\3:.quad hypercall_page
+        \\4:.align 4
+        \\    .popsection
+        \\
         \\.globl shared_info, hypercall_page
         \\    .align 4096
         \\shared_info:
@@ -29,11 +44,6 @@ export fn _start() callconv(.Naked) noreturn {
         \\hypercall_page:
         \\    .fill 4096,1,0
     );
-
-    elfNote.genXenAsciz(.xen_version, "xen-3.0");
-    elfNote.genXenAsciz(.guest_os, "Mini-ZOS");
-    elfNote.genXenAsciz(.loader, "generic");
-    //elfNote.genXenLong(.hypercall_page, hypercall_page);
 
     while (true)
         asm volatile ("hlt");

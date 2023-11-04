@@ -43,22 +43,7 @@ const XenElfNote = enum {
     }
 };
 
-inline fn toHexString(comptime value: usize) []const u8 {
-    _ = value;
-
-    return "0xFFFFFFFF";
-}
-
-pub inline fn genXenLong(comptime value: XenElfNote, comptime desc: usize) void {
-    const desc_string = toHexString(desc);
-
-    asm volatile (XenElfNote.pushsection() ++
-            "    .long " ++ value.toString() ++ "\n" ++ // type
-            XenElfNote.middlesection() ++
-            "3:.long \"" ++ desc_string ++ "\"\n" ++
-            XenElfNote.popsection());
-}
-pub inline fn genXenAsciz(comptime value: XenElfNote, comptime desc: []const u8) void {
+pub inline fn genXen(comptime value: XenElfNote, comptime desc: []const u8) void {
     asm volatile (XenElfNote.pushsection() ++
             "    .long " ++ value.toString() ++ "\n" ++ // type
             XenElfNote.middlesection() ++
