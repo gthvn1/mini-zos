@@ -1,3 +1,8 @@
+> **Warning**
+This project has been archived because the main project is now [barebones](https://github.com/gthvn1/barebones).
+My idea is too merge [barebones](https://github.com/gthvn1/barebones) and [zanzibar](https://github.com/gthvn1/zanzibar) at some point to be able to run barebones on Xen with zanzibar as monkey REPL
+
+---
 # Mini-Zos
 
 Inspired by mini-os that is a small OS kernel running on Xen hypervisor.
